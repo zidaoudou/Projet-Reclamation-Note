@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Plateforme de Réclamation de Notes</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <div class="container">
+
+    <!-- PAGE 1: Connexion Étudiant & Accès Résultats -->
+    <div id="page1" class="page active">
+      <h2>Espace Étudiant</h2>
+      <form id="form-login-etudiant">
+        <div class="form-group">
+          <label for="login-nom">Nom :</label>
+          <input type="text" id="login-nom" placeholder="Entrez votre nom" required>
+        </div>
+        <div class="form-group">
+          <label for="login-prenom">Prénom :</label>
+          <input type="text" id="login-prenom" placeholder="Entrez votre prénom" required>
+        </div>
+        <div class="form-group">
+          <label for="login-filiere">Filière :</label>
+          <input type="text" id="login-filiere" placeholder="Ex: Informatique / Physique" required>
+        </div>
+        <div class="form-group">
+          <label for="login-id">Code ID Étudiant :</label>
+          <input type="text" id="login-id" placeholder="Ex: ETU-1234" required>
+        </div>
+        <button type="submit" class="btn-primary">Faire une Nouvelle Réclamation</button>
+      </form>
+
+      <div class="divider">OU</div>
+
+      <!-- BOUTON DIRECT VOIR LES RÉSULTATS -->
+      <button type="button" id="btn-voir-mes-resultats" class="btn-secondary">📋 Voir Mes Résultats & Notes Révisées</button>
+      
+      <span class="nav-link" id="link-to-prof">Accès Espace Enseignant</span>
+    </div>
+
+    <!-- PAGE 2: Choix du Module & Professeur -->
+    <div id="page2" class="page">
+      <h2>Nouvelle Réclamation</h2>
+      <form id="form-reclamation">
+        <div class="form-group">
+          <label for="rec-nom">Nom :</label>
+          <input type="text" id="rec-nom" readonly>
+        </div>
+        <div class="form-group">
+          <label for="rec-prenom">Prénom :</label>
+          <input type="text" id="rec-prenom" readonly>
+        </div>
+        <div class="form-group">
+          <label for="rec-filiere">Filière :</label>
+          <input type="text" id="rec-filiere" readonly>
+        </div>
+        <div class="form-group">
+          <label for="rec-id">Code ID :</label>
+          <input type="text" id="rec-id" readonly>
+        </div>
+        <div class="form-group">
+          <label for="rec-module">Module concerné :</label>
+          <select id="rec-module" required>
+            <option value="">-- Sélectionnez un module --</option>
+            <option value="Analyse">ANALYSE</option>
+            <option value="Digital">DIGITAL</option>
+            <option value="Python">PYTHON/option>
+            <option value="JavaScript">JAVASCRIPT</option>
+            <option value="Statistique">STATISTIQUE</option>
+            <option value="Algorithme">ALGORITHM</option>
+            <option value="Langage C">LANGAGE C</option>
+            <option value="Électrostatique">ÉLECTROSTATIQUE</option>
+            <option value="algebra">ALGEBRA</option>
+            <option value="dynamique algoritm">DYNAMIQUE ALGORITHM</option>
+
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="rec-prof">Professeur concerné :</label>
+          <select id="rec-prof" required>
+            <option value="">-- Sélectionnez l'enseignant --</option>
+            <option value="Dr Ouedraogo">Dr Ouedraogo</option>
+            <option value="Mne Kewaki">Mne KEWAKI</option>
+            <option value="Dr Lebian">Dr LEBIAN</option>
+            <option value="Mr Boulou">Mr BOULOU</option>
+            <option value="Mr Sanou">Mr SANOU</option>
+            <option value="Mne soudre">Mne SOUDRE</option>
+            <option value="Mr Euloge">Mr EULOGE</option>
+            <option value="Mr silga">Mr SILGA</option>
+            <option value="Mne boulga">Mne BOULGA</option>
+            <option value="Mr poin">Mr POIN</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="rec-note">Note initiale (sur 20) :</label>
+          <input type="number" id="rec-note" min="0" max="20" step="0.25" placeholder="Ex: 08.50" required>
+        </div>
+        <button type="submit" class="btn-primary">Suivant : Photos & Annotation</button>
+      </form>
+    </div>
+
+    <!-- PAGE 3: Photo, Explication & Annotation -->
+    <div id="page3" class="page">
+      <h2>Photos de la Copie & Annotations</h2>
+      <p class="sub-title"> <strong>Astuce :</strong> Une fois la photo prise, <u>cliquez dessus</u> pour entourer/souligner l'erreur en rouge avant d'envoyer !</p>
+      
+      <div id="video-container">
+        <video id="webcam" autoplay playsinline></video>
+      </div>
+      
+      <button type="button" id="btn-capture" class="btn-secondary">📸 Prenez une photo (<span id="photo-count">0</span>/5)</button>
+      
+      <div id="gallery-container" class="gallery-grid"></div>
+
+      <div class="form-group" style="margin-top: 15px;">
+        <label for="rec-explication">Explication de l'erreur :</label>
+        <textarea id="rec-explication" rows="3" placeholder="Ex: Erreur de calcul sur la question 2, page 1..." required></textarea>
+      </div>
+
+      <button type="button" id="btn-envoyer-reclamation" class="btn-success">Envoyer la Réclamation</button>
+      <span class="nav-link" onclick="goToPage('page1')">Annuler</span>
+    </div>
+
+    <!-- PAGE 4: Espace Enseignant -->
+    <div id="page4" class="page">
+      <h2>Espace Enseignant</h2>
+      
+      <form id="form-prof-login">
+        <div class="form-group">
+          <label for="prof-nom">Nom :</label>
+          <input type="text" id="prof-nom" placeholder="Entrez votre nom" required>
+        </div>
+        <div class="form-group">
+          <label for="prof-module">Module enseigné :</label>
+          <select id="prof-module" required>
+            <option value="Analyse">ANALYSE</option>
+            <option value="Digital">DIGITAL</option>
+            <option value="Python">PYTHON</option>
+            <option value="JavaScript">JAVASCRIPT</option>
+            <option value="Statistique">STATISTIQUE</option>
+            <option value="Algorithme">ALGORITHM</option>
+            <option value="Langage C">LANGAGE C</option>
+            <option value="Électrostatique">ÉLECTROSTATIQUE</option>
+            <option value="algebre">ALGEBRA</option>
+            <option value="dynamique algoritm">DYNAMIQUE ALGORITHM</option>
+
+          </select>
+        </div>
+        <button type="submit" class="btn-primary">Se connecter & Voir les Copies</button>
+      </form>
+
+      <div id="prof-dashboard" style="display:none;">
+        <h3>Réclamations reçues</h3>
+        <div id="reclamation-container"></div>
+      </div>
+
+      <span class="nav-link" id="link-to-student">Retour à l'Espace Étudiant</span>
+    </div>
+
+    <!-- PAGE 5: RÉSULTATS DE L'ÉTUDIANT -->
+    <div id="page5" class="page">
+      <h2>Mes Résultats & Notes</h2>
+      <p class="sub-title">Entrez votre Code ID Étudiant pour afficher l'état de vos réclamations et vos notes corrigées.</p>
+      
+      <div class="form-group">
+        <label for="search-id">Votre Code ID Étudiant :</label>
+        <input type="text" id="search-id" placeholder="Ex: ETU-1234">
+      </div>
+      <button type="button" id="btn-chercher-reclamations" class="btn-primary">Consulter mes résultats</button>
+
+      <div id="etudiant-results-container" style="margin-top: 20px;"></div>
+
+      <span class="nav-link" onclick="goToPage('page1')">← Retour à l'accueil</span>
+    </div>
+
+  </div>
+
+  <!-- MODALE POUR ANNOTATION SUR LES PHOTOS (ÉTUDIANT ET PROF) -->
+  <div id="draw-modal" class="draw-modal">
+    <div class="draw-modal-box">
+      <h3> Dessiner / Entourer l'erreur</h3>
+      <p class="sub-title">Utilisez votre doigt ou la souris pour entourer la zone concernée.</p>
+      
+      <div class="draw-tools">
+        <label>Couleur du trait :</label>
+        <input type="color" id="draw-color" value="#ef4444">
+        <button type="button" id="btn-reset-draw">Effacer tout</button>
+      </div>
+
+      <div class="canvas-holder">
+        <canvas id="drawing-canvas"></canvas>
+      </div>
+
+      <div class="draw-actions">
+        <button type="button" id="btn-save-draw" class="btn-success">Sauvegarder l'annotation</button>
+        <button type="button" id="btn-cancel-draw" class="btn-secondary">Annuler</button>
+      </div>
+    </div>
+  </div>
+
+  <canvas id="canvas" style="display:none;"></canvas>
+
+  <script src="script.js"></script>
+</body>
+</html>

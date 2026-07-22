@@ -75,8 +75,8 @@ async function initCamera() {
 }
 
 document.getElementById('btn-capture').addEventListener('click', function() {
-  if (capturedPhotos.length >= 5) {
-    alert("Maximum 5 photos autorisées.");
+  if (capturedPhotos.length >= 10) {
+    alert("Maximum 10 photos autorisées.");
     return;
   }
 

@@ -187,8 +187,8 @@ function validerNote(index) {
   loadProfData();
 }
 
-// --- PAGE 5: RÉSULTATS ÉTUDIANT ---
-// --- PAGE 5: RÉSULTATS ÉTUDIANT ---
+ --- PAGE 5: RÉSULTATS ÉTUDIANT ---
+
 document.getElementById('btn-chercher-reclamations').addEventListener('click', function() {
   const searchId = document.getElementById('search-id').value.trim();
   const container = document.getElementById('etudiant-results-container');
